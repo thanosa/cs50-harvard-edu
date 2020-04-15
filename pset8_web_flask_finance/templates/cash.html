@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Buy
+{% endblock %}
+
+{% block main %}
+    <form action="/cash" method="post">
+        <table>
+            <div class="row m-2">
+                <div class="col"></div>
+                <div class="col-3 input-group">
+                    <input autocomplete="off" autofocus class="form-control text-center bg-light" id="quantity" name="quantity" placeholder="Cash" required onkeypress="return false;">
+                    <button class="btn btn-success" type="submit">Add</button>
+                </div>
+                <div class="col"></div>
+            </div>
+
+            <div class="row m-2">
+                <div class="col"></div>
+                <div class="col-6"><br></div>
+                <div class="col"></div>
+            </div>
+
+
+            <div class="row m-2">
+                <div class="col"></div>
+                <div class="col-8">
+                    <button class="btn btn-primary" onClick="increaseBy(10000)" type="button">10000</button>
+                    <button class="btn btn-primary" onClick="increaseBy(5000)" type="button">5000</button>
+                    <button class="btn btn-primary" onClick="increaseBy(1000)" type="button">1000</button>
+                </div>
+                <div class="col"></div>
+            </div>
+
+            <div class="row m-2">
+                <div class="col"></div>
+                <div class="col-8">
+                    <button class="btn btn-secondary" onClick="increaseBy(0)" type="button">Reset</button>
+                </div>
+                <div class="col"></div>
+            </div>
+
+            <div class="row m-2">
+                <div class="col"></div>
+                <div class="col-8">
+
+                </div>
+                <div class="col"></div>
+            </div>
+        </table>
+    </form>
+{% endblock %}

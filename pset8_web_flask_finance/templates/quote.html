@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Quote
+{% endblock %}
+
+{% block main %}
+    <form action="/quote" method="post">
+        <div class="row">
+            <div class="col"></div>
+            <div class="col-3 input-group">
+                <input autocomplete="off" autofocus class="form-control text-center" name="symbol" placeholder="Stock symbol" type="text" required>
+                <span class="input-group-btn">
+                    <button class="btn btn-primary" type="submit">Quote</button>
+                </span>
+            </div>
+            <div class="col"></div>
+        </div>
+
+        {% if quote %}
+            <br>
+            <div><b>{{ quote["symbol"] }}</b>: {{ quote["name"] }}</div>
+            <div>Current stock price</div>
+            <div class="text-primary"><h3>$ {{ quote["price"] }}</h3></div>
+        {% endif %}
+
+        <br><br>
+        <p>Example stock symbols:</p>
+        <div class="container list-group-item border border-0 text-left col">
+            <div class="row">
+            <div class="col"></div>
+            <div class="col-8">
+                <ul>
+                    {% for symbol in symbols %}
+                    <li><b>{{ symbol["symbol"] }}</b>: {{ symbol["name"] }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col"></div>
+            </div>
+        </div>
+
+        <div>
+            <a href="/quote">
+                <button class="btn btn-primary" onClick="location=/quote" type="button">I feel unlucky</button>
+            </a>
+        </div>
+
+    </form>
+{% endblock %}

@@ -1,0 +1,79 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Sell
+{% endblock %}
+
+{% block main %}
+    <form action="/sell" method="post" onsubmit="return confirmTransaction('sell')">
+        <table>
+            <div class="row m-2">
+                <div class="col"></div>
+                <div class="col-3">
+                    <div class="input-group">
+                        <select required class="form-control text-center" name="symbol">
+                            <option selected disabled value="">Symbol</option>
+                            {% for stock in stocks  %}
+                                <option>{{ stock["symbol"] }}</option>
+                            {% endfor %}
+                        </select>
+                        <button class="btn btn-success" type="submit">Sell</button>
+                    </div>
+                </div>
+                <div class="col"></div>
+            </div>
+
+            <div class="row m-2">
+                <div class="col"></div>
+                <div class="col-6"><br></div>
+                <div class="col"></div>
+            </div>
+
+            <div class="row m-2">
+                <div class="col"></div>
+                <div class="col-6">
+                    <input autocomplete="off" autofocus class="form-control text-center bg-light" id="quantity" name="quantity" placeholder="Quantity" required onkeypress="return false;">
+                </div>
+                <div class="col"></div>
+            </div>
+
+            <div class="row m-2">
+                <div class="col"></div>
+                <div class="col-8">
+                    <button class="btn btn-primary" onClick="increaseBy(100)" type="button">100</button>
+                    <button class="btn btn-primary" onClick="increaseBy(50)" type="button">50</button>
+                    <button class="btn btn-primary" onClick="increaseBy(10)" type="button">10</button>
+                    <button class="btn btn-primary" onClick="increaseBy(5)" type="button">5</button>
+                    <button class="btn btn-primary" onClick="increaseBy(1)" type="button">1</button>
+                </div>
+                <div class="col"></div>
+            </div>
+
+            <div class="row m-2">
+                <div class="col"></div>
+                <div class="col-8">
+                    <button class="btn btn-primary" onClick="increaseBy(5000)" type="button">5000</button>
+                    <button class="btn btn-primary" onClick="increaseBy(1000)" type="button">1000</button>
+                    <button class="btn btn-primary" onClick="increaseBy(500)" type="button">500</button>
+                </div>
+                <div class="col"></div>
+            </div>
+
+            <div class="row m-2">
+                <div class="col"></div>
+                <div class="col-8">
+                    <button class="btn btn-secondary" onClick="increaseBy(0)" type="button">Reset</button>
+                </div>
+                <div class="col"></div>
+            </div>
+
+            <div class="row m-2">
+                <div class="col"></div>
+                <div class="col-8">
+
+                </div>
+                <div class="col"></div>
+            </div>
+        </table>
+    </form>
+{% endblock %}
