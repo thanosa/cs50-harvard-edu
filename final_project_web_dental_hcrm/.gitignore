@@ -1,0 +1,9 @@
+__pycache__/
+*.py[cod]
+
+**/venv/
+solution/.vscode/settings.json
+solution/dental_hcrm.db-journal
+solution/dental_hcrm.db.sqbpro
+/solution/venv
+/solution/app.env

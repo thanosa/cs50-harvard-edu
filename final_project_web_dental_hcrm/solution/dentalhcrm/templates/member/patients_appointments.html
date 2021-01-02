@@ -1,0 +1,76 @@
+{% extends "layouts/layout.html" %}
+
+{% block title%}
+{{ title }}
+{% endblock %}
+
+{% block main %}
+
+<div class="container patient">
+  <div class="col md-16">
+    <div class="p-3">
+      <h3>
+        #{{ patient.id }} {{ patient.name }} {{ patient.surname }}
+
+        <button type="button" class="btn btn-sm btn-success float-right"
+          onclick=window.location.href="{{ url_for('member.add_patients_appointment', patient_id=patient.id) }}">
+          Add
+          <i class="fas fa-plus"></i>
+        </button>
+
+      </h3>
+      <table class="table table-responsive-xs">
+        <thead>
+          <tr>
+            <th>Medical History</th>
+            <th>Dental History</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>{{ patient.medical_history }}</th>
+            <th>{{ patient.dental_history }}</th>
+            <th>{{ patient.notes }}</th>
+          </tr>
+        </tbody>
+      </table>
+
+
+      <table class="table table-hover table-striped table-responsive-xs">
+        <h3>Appointments</h3>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Complaint</th>
+            <th>Treatment Plan</th>
+            <th>Actions Done</th>
+            <th>Advice</th>
+            <th>Next Visit</th>
+            <th>Transaction Notes</th>
+            <th>Cost</th>
+            <th>Receipt</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for appointment in appointments %}
+          <tr>
+            <td><a href="{{ url_for('member.update_appointment', appointment_id=appointment.id) }}">{{ appointment.date.strftime('%d-%m-%Y') }}</a></td>
+            <td><a href="{{ url_for('member.update_appointment', appointment_id=appointment.id) }}">{{ appointment.complaint }}</td>
+            <td><a href="{{ url_for('member.update_appointment', appointment_id=appointment.id) }}">{{ appointment.treatment_plan }}</a></td>
+            <td><a href="{{ url_for('member.update_appointment', appointment_id=appointment.id) }}">{{ appointment.actions_done }}</a></td>
+            <td><a href="{{ url_for('member.update_appointment', appointment_id=appointment.id) }}">{{ appointment.advice }}</a></td>
+            <td><a href="{{ url_for('member.update_appointment', appointment_id=appointment.id) }}">{{ appointment.next_visit }}</a></td>
+            <td><a href="{{ url_for('member.update_appointment', appointment_id=appointment.id) }}">{{ appointment.transaction_notes }}</a></td>
+            <td><a href="{{ url_for('member.update_appointment', appointment_id=appointment.id) }}">{{ "€ %.0f"|format(appointment.cost) }}</a></td>
+            <td><a href="{{ url_for('member.update_appointment', appointment_id=appointment.id) }}">{{ "€ %.0f"|format(appointment.receipt) }}</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>
+
+{% endblock %}

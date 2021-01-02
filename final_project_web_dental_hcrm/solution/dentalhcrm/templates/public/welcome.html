@@ -1,0 +1,14 @@
+{% extends "layouts/layout.html" %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block main %}
+<h1>Welcome to Dental Healthcare CRM!</h1>
+<div>
+  <form action="/signup">
+    <button class="btn btn-success mt-5" type="submit">Try it now!</button>
+  </form>
+</div>
+{% endblock %}

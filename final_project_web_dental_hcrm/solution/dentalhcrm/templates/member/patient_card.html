@@ -1,0 +1,226 @@
+{% extends "layouts/layout.html" %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block main %}
+<div class="container">
+  <form method="POST" action="">
+    {{ form.hidden_tag() }}
+    <fieldset class="form-group-wide">
+
+      <h3 class="border-bottom mb-4">Patient Card
+
+        {% if delete_button %}
+        <button type="button" title="Delete" id="delete_button"
+          data-confirm="Are you sure to delete the patient and all of it's appointments: {{ form.name.data }} {{ form.surname.data }} ({{ form.id.data }}) ?"
+          class="btn btn-sm btn-danger float-right"
+          onclick="ConfirmDelete()" 
+          href="{{ url_for('member.delete_patient', patient_id=form.id.data) }}">
+          Delete
+          <i class="fas fa-minus"></i>
+        </button>
+        {% endif %}
+      </h3>
+
+      <div class="row">
+        <div class="col-sm">
+          <!-- NAME -->
+          <div class="form-group">
+            {% if form.name.errors %}
+            {{ form.name(class="form-control form-control-lg is-invalid", placeholder="name") }}
+            <div class="invalid-feedback">
+              {% for error in form.name.errors %}
+              <span>{{ error }}</span>
+              {% endfor %}
+            </div>
+            {% else %}
+            {{ form.name(class="form-control form-control-lg", placeholder="name") }}
+            {% endif %}
+          </div>
+
+          <!-- SURNAME -->
+          <div class="form-group">
+            {% if form.surname.errors %}
+            {{ form.surname(class="form-control form-control-lg is-invalid", placeholder="surname") }}
+            <div class="invalid-feedback">
+              {% for error in form.surname.errors %}
+              <span>{{ error }}</span>
+              {% endfor %}
+            </div>
+            {% else %}
+            {{ form.surname(class="form-control form-control-lg", placeholder="surname") }}
+            {% endif %}
+          </div>
+
+          <!-- REFERRAL -->
+          <div class="form-group">
+            {% if form.referral.errors %}
+            {{ form.referral(class="form-control form-control-lg is-invalid", placeholder="referral") }}
+            <div class="invalid-feedback">
+              {% for error in form.referral.errors %}
+              <span>{{ error }}</span>
+              {% endfor %}
+            </div>
+            {% else %}
+            {{ form.referral(class="form-control form-control-lg", placeholder="referral") }}
+            {% endif %}
+          </div>
+
+          <!-- ADDRESS -->
+          <div class="form-group">
+            {% if form.address.errors %}
+            {{ form.address(class="form-control form-control-lg is-invalid", placeholder="address") }}
+            <div class="invalid-feedback">
+              {% for error in form.address.errors %}
+              <span>{{ error }}</span>
+              {% endfor %}
+            </div>
+            {% else %}
+            {{ form.address(class="form-control form-control-lg", placeholder="address") }}
+            {% endif %}
+          </div>
+
+          <!-- PHONE NUMBER -->
+          <div class="form-group">
+            {% if form.phone_number.errors %}
+            {{ form.phone_number(class="form-control form-control-lg is-invalid", placeholder="phone") }}
+            <div class="invalid-feedback">
+              {% for error in form.phone_number.errors %}
+              <span>{{ error }}</span>
+              {% endfor %}
+            </div>
+            {% else %}
+            {{ form.phone_number(class="form-control form-control-lg", placeholder="phone") }}
+            {% endif %}
+          </div>
+
+          <!-- EMAIL -->
+          <div class="form-group">
+            {% if form.email.errors %}
+            {{ form.email(class="form-control form-control-lg is-invalid", placeholder="email") }}
+            <div class="invalid-feedback">
+              {% for error in form.email.errors %}
+              <span>{{ error }}</span>
+              {% endfor %}
+            </div>
+            {% else %}
+            {{ form.email(class="form-control form-control-lg", placeholder="email") }}
+            {% endif %}
+          </div>
+
+          <!-- GENDER -->
+          <div class="form-group">
+            {% if form.gender.errors %}
+            {{ form.gender(class="form-control form-control-lg is-invalid", placeholder="gender") }}
+            <div class="invalid-feedback">
+              {% for error in form.gender.errors %}
+              <span>{{ error }}</span>
+              {% endfor %}
+            </div>
+            {% else %}
+            {{ form.gender(class="form-control form-control-lg", placeholder="gender") }}
+            {% endif %}
+          </div>
+
+          <!-- YEAR OF BIRTH -->
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                {% if form.year_of_birth.errors %}
+                {{ form.year_of_birth(class="form-control form-control-pair form-control-lg float-left is-invalid", placeholder="year of birth", id="patient_year_of_birth", onchange="calc_patient_age()") }}
+                <div class="invalid-feedback">
+                  {% for error in form.year_of_birth.errors %}
+                  <span>{{ error }}</span>
+                  {% endfor %}
+                </div>
+                {% else %}
+                {{ form.year_of_birth(class="form-control form-control-pair form-control-lg float-left", placeholder="year of birth", id="patient_year_of_birth", onchange="calc_patient_age()") }}
+                {% endif %}
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                {% if form.age.errors %}
+                {{ form.age(class="form-control form-control-pair form-control-lg float-right is-invalid", placeholder="age", id="patient_age", onchange="calc_patient_year_of_birth()") }}
+                <div class="invalid-feedback">
+                  {% for error in form.age.errors %}
+                  <span>{{ error }}</span>
+                  {% endfor %}
+                </div>
+                {% else %}
+                {{ form.age(class="form-control form-control-pair form-control-lg float-right", placeholder="age", id="patient_age", onchange="calc_patient_year_of_birth()") }}
+                {% endif %}
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="col-sm">
+          <!-- MEDICAL HISTORY -->
+          <div class="form-group">
+            {% if form.medical_history.errors %}
+            {{ form.medical_history(class="form-control form-control-textarea form-control-lg is-invalid", placeholder="medical history") }}
+            <div class="invalid-feedback">
+              {% for error in form.medical_history.errors %}
+              <span>{{ error }}</span>
+              {% endfor %}
+            </div>
+            {% else %}
+            {{ form.medical_history(class="form-control form-control-textarea form-control-lg", placeholder="medical history") }}
+            {% endif %}
+          </div>
+
+          <!-- DENTAL HISTORY -->
+          <div class="form-group">
+            {% if form.dental_history.errors %}
+            {{ form.dental_history(class="form-control form-control-textarea form-control-lg is-invalid", placeholder="dental history") }}
+            <div class="invalid-feedback">
+              {% for error in form.dental_history.errors %}
+              <span>{{ error }}</span>
+              {% endfor %}
+            </div>
+            {% else %}
+            {{ form.dental_history(class="form-control form-control-textarea form-control-lg", placeholder="dental history") }}
+            {% endif %}
+          </div>
+
+          <!-- NOTES -->
+          <div class="form-group">
+            {% if form.notes.errors %}
+            {{ form.notes(class="form-control form-control-lg is-invalid", placeholder="notes") }}
+            <div class="invalid-feedback">
+              {% for error in form.notes.errors %}
+              <span>{{ error }}</span>
+              {% endfor %}
+            </div>
+            {% else %}
+            {{ form.notes(class="form-control form-control-lg", placeholder="notes") }}
+            {% endif %}
+          </div>
+        </div>
+      </div>
+
+
+      <div class="form-group-mid">
+        <div class="row">
+
+          <div class="col">
+            <button type="button" class="btn btn-warning btn-block mt-4"
+              onclick=window.location.href="{{ url_for('member.patients_all') }}">
+              Cancel
+            </button>
+          </div>
+
+          <div class="col-6">
+            {{ form.submit(class="btn btn-success btn-block mt-4") }}
+          </div>
+
+        </div>
+      </div>
+    </fieldset>
+  </form>
+</div>
+{% endblock %}

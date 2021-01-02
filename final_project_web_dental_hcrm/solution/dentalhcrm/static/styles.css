@@ -1,0 +1,102 @@
+nav .navbar-brand
+{
+  /* size for brand */
+  font-size: xx-large;
+}
+
+nav .navbar-brand .green
+{
+  /* color for brand */
+  color: #2e944b;
+}
+
+main .form-group 
+{
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  
+}
+
+main .table tbody tr td a 
+{
+  color: black; 
+}
+
+main .table td
+{
+  vertical-align: middle;
+}
+
+main .form-group-wide
+{
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+main .form-group-mid
+{
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+main .form-control-textarea
+{
+  min-height: 180px
+}
+
+main .form-control-pair
+{
+  width: 100%;
+}
+
+
+main .form-control
+{
+  /* center form controls */
+  display: inline-block;
+
+  /* override Bootstrap's 100% width for form controls */
+  /* width: auto; */
+  align-self: center;
+}
+
+
+main
+{
+  /* scroll horizontally as needed */
+  overflow-x: auto;
+
+  /* center contents */
+  text-align: center;
+}
+
+
+.container 
+{
+  /* background-color: red; */
+  margin: 0 auto;
+  align-items: center;
+  text-align: center;
+}
+
+.footer 
+{
+  /* footer */
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: black;
+  color: white;
+  text-align: center;
+  height: 40px;
+  z-index: 80;
+}
+
+.alert 
+{
+  width:100%;
+}

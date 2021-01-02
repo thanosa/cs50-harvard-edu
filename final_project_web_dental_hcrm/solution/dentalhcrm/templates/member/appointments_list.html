@@ -1,0 +1,48 @@
+{% extends "layouts/layout.html" %}
+
+{% block title%}
+{{ title }}
+{% endblock %}
+
+{% block main %}
+
+<div class="container">
+  <div class="patient">
+    <div class="col md-16">
+      <div class="p-3">
+        <h3>Appointments</h3>
+        <table class="table table-hover table-striped table-responsive-xs">
+          <thead>
+            <tr>
+              <th>Patient</th>
+              <th>Date</th>
+              <th>Complaint</th>
+              <th>Treatment Plan</th>
+              <th>Actions Done</th>
+              <th>Next Visit</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for appointment in appointments %}
+            <tr>
+              <td><a href="{{ url_for('member.update_patient', patient_id=appointment.patient_id) }}">{{ appointment.patient.name }} {{ appointment.patient.surname }} ({{ appointment.patient.id }})</a></td>
+              <td><a href="{{ url_for('member.update_patient', patient_id=appointment.patient_id) }}">{{ appointment.date.strftime('%d-%m-%Y') }}</a></td>
+              <td><a href="{{ url_for('member.update_patient', patient_id=appointment.patient_id) }}">{{ appointment.complaint }}</a></td>
+              <td><a href="{{ url_for('member.update_patient', patient_id=appointment.patient_id) }}">{{ appointment.treatment_plan }}</a></td>
+              <td><a href="{{ url_for('member.update_patient', patient_id=appointment.patient_id) }}">{{ appointment.actions_done }}</a></td>
+              <td><a href="{{ url_for('member.update_patient', patient_id=appointment.patient_id) }}">{{ appointment.next_visit }}</a></td>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+{% endblock %}

@@ -1,0 +1,251 @@
+{% extends "layouts/layout.html" %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block main %}
+
+
+<div class="container patient">
+  <form method="POST" action="">
+    {{ form.hidden_tag() }}
+    <fieldset class="form-group-wide">
+
+      <div class="row">
+
+        <div class="container col md-16">
+          <div class="p-3">
+            <h3>#{{ form.patient_id.data }} {{ form.name.data }} {{ form.surname.data }}
+
+              {% if delete_button %}
+              <button type="button" title="Delete" id="delete_button"
+                data-confirm="Are you sure to delete the appointment of {{ form.date.data.strftime('%Y-%m-%d') }} ?"
+                class="btn btn-sm btn-danger float-right"
+                onclick="ConfirmDelete()" 
+                href="{{ url_for('member.delete_patients_appointment', appointment_id=form.id.data) }}">
+                Delete
+                <i class="fas fa-minus"></i>
+              </button>
+              {% endif %}
+            </h3>
+
+            <table class="table table-responsive-xs">
+              <thead>
+                <tr>
+                  <th>Medical History</th>
+                  <th>Dental History</th>
+                  <th>Notes</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>{{ form.medical_history.data }}</th>
+                  <th>{{ form.dental_history.data }}</th>
+                  <th>{{ form.notes.data }}</th>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="border-bottom mb-4">Appointment</h3>
+
+      <div class="row">
+
+        <div class="col-sm">
+          
+          <!-- COMPLAINT -->
+          <div class="form-group">
+            {% if form.complaint.errors %}
+            {{ form.complaint(class="form-control form-control-textarea form-control-lg is-invalid", placeholder="complaint") }}
+            <div class="invalid-feedback">
+              {% for error in form.complaint.errors %}
+              <span>{{ error }}</span>
+              {% endfor %}
+            </div>
+            {% else %}
+            {{ form.complaint(class="form-control form-control-textarea form-control-lg", placeholder="complaint") }}
+            {% endif %}
+          </div>
+
+        </div>
+
+        <div class="col-sm">
+
+          <!-- TREATMENT PLAN -->
+          <div class="form-group">
+            {% if form.treatment_plan.errors %}
+            {{ form.treatment_plan(class="form-control form-control-textarea form-control-lg is-invalid", placeholder="treatment
+            plan") }}
+            <div class="invalid-feedback">
+              {% for error in form.treatment_plan.errors %}
+              <span>{{ error }}</span>
+              {% endfor %}
+            </div>
+            {% else %}
+            {{ form.treatment_plan(class="form-control form-control-textarea form-control-lg", placeholder="treatment
+            plan") }}
+            {% endif %}
+          </div>
+
+        </div>
+
+        <div class="col-sm">
+
+          <!-- ACTIONS DONE -->
+          <div class="form-group">
+            {% if form.actions_done.errors %}
+            {{ form.actions_done(class="form-control form-control-textarea form-control-lg is-invalid", placeholder="actions done") }}
+            <div class="invalid-feedback">
+              {% for error in form.actions_done.errors %}
+              <span>{{ error }}</span>
+              {% endfor %}
+            </div>
+            {% else %}
+            {{ form.actions_done(class="form-control form-control-textarea form-control-lg", placeholder="actions done")
+            }}
+            {% endif %}
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="row">
+
+        <div class="col-sm">
+
+          <!-- ADVICE -->
+          <div class="form-group">
+            {% if form.advice.errors %}
+            {{ form.advice(class="form-control form-control-textarea form-control-lg is-invalid", placeholder="advice") }}
+            <div class="invalid-feedback">
+              {% for error in form.advice.errors %}
+              <span>{{ error }}</span>
+              {% endfor %}
+            </div>
+            {% else %}
+            {{ form.advice(class="form-control form-control-textarea form-control-lg", placeholder="advice") }}
+            {% endif %}
+          </div>
+
+        </div>
+
+        <div class="col-sm">
+
+          <!-- NEXT VISIT -->
+          <div class="form-group">
+            {% if form.next_visit.errors %}
+            {{ form.next_visit(class="form-control form-control-textarea form-control-lg is-invalid", placeholder="next visit") }}
+            <div class="invalid-feedback">
+              {% for error in form.next_visit.errors %}
+              <span>{{ error }}</span>
+              {% endfor %}
+            </div>
+            {% else %}
+            {{ form.next_visit(class="form-control form-control-textarea form-control-lg", placeholder="next visit") }}
+            {% endif %}
+          </div>
+
+        </div>
+
+        <div class="col-sm">
+
+          <!-- TRANSACTION NOTES -->
+          <div class="form-group">
+            {% if form.transaction_notes.errors %}
+            {{ form.transaction_notes(class="form-control form-control-textarea form-control-lg is-invalid",
+            placeholder="transaction notes") }}
+            <div class="invalid-feedback">
+              {% for error in form.transaction_notes.errors %}
+              <span>{{ error }}</span>
+              {% endfor %}
+            </div>
+            {% else %}
+            {{ form.transaction_notes(class="form-control form-control-textarea form-control-lg",
+            placeholder="transaction notes") }}
+            {% endif %}
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="row">
+
+        <div class="col-4">
+          <!-- DATE -->
+          <div class="form-group">
+            {% if form.date.errors %}
+            {{ form.date(class="form-control form-control-lg is-invalid", placeholder="date", type="date") }}
+            <div class="invalid-feedback">
+              {% for error in form.date.errors %}
+              <span>{{ error }}</span>
+              {% endfor %}
+            </div>
+            {% else %}
+            {{ form.date(class="form-control form-control-lg", placeholder="date", type="date") }}
+            {% endif %}
+          </div>
+        </div>
+        <div class="col-4">
+          <!-- COST -->
+          <div class="form-group">
+            {% if form.cost.errors %}
+            {{ form.cost(class="form-control form-control-lg is-invalid", placeholder="cost") }}
+            <div class="invalid-feedback">
+              {% for error in form.cost.errors %}
+              <span>{{ error }}</span>
+              {% endfor %}
+            </div>
+            {% else %}
+            {{ form.cost(class="form-control form-control-lg", placeholder="cost") }}
+            {% endif %}
+          </div>
+        </div>
+        <div class="col-4">
+
+          <!-- RECEIPT -->
+          <div class="form-group">
+            {% if form.receipt.errors %}
+            {{ form.receipt(class="form-control form-control-lg is-invalid", placeholder="receipt") }}
+            <div class="invalid-feedback">
+              {% for error in form.receipt.errors %}
+              <span>{{ error }}</span>
+              {% endfor %}
+            </div>
+            {% else %}
+            {{ form.receipt(class="form-control form-control-lg", placeholder="receipt") }}
+            {% endif %}
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="row">
+
+        <div class="col"></div>
+
+        <div class="col-4">
+          <button type="button" class="btn btn-warning btn-block mt-4"
+            onclick=window.location.href="{{ url_for('member.patients_appointments', patient_id=form.patient_id.data) }}">
+            Cancel
+          </button>
+        </div>
+    
+        <div class="col-4">
+          {{ form.submit(class="btn btn-success btn-block mt-4") }}
+        </div>
+
+        <div class="col"></div>
+    
+      </div>
+    </fieldset>
+  </form>
+</div>
+{% endblock %}

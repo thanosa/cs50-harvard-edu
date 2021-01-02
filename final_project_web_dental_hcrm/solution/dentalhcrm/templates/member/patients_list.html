@@ -1,0 +1,63 @@
+{% extends "layouts/layout.html" %}
+
+{% block title%}
+{{ title }}
+{% endblock %}
+
+{% block main %}
+
+<div class="container">
+  <div class="patient">
+    <div class="col md-16">
+      <div class="p-3">
+        <h3>
+          Patients
+          <button type="button" class="btn btn-sm btn-success float-right"
+            onclick=window.location.href="{{ url_for('member.add_patient') }}">
+            Add
+            <i class="fas fa-plus"></i>
+          </button>
+        </h3>
+
+        <table class="table table-hover table-striped table-responsive-xs">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Surname</th>
+              <th>Referral</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Appointments</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for patient in patients %}
+            <tr>
+              <td><a href="{{ url_for('member.update_patient', patient_id=patient.id) }}">{{ patient.id }}</a></td>
+              <td><a href="{{ url_for('member.update_patient', patient_id=patient.id) }}">{{ patient.name }}</a></td>
+              <td><a href="{{ url_for('member.update_patient', patient_id=patient.id) }}">{{ patient.surname }}</a></td>
+              <td><a href="{{ url_for('member.update_patient', patient_id=patient.id) }}">{{ patient.referral }}</a></td>
+              <td><a href="{{ url_for('member.update_patient', patient_id=patient.id) }}">{{ patient.email }}</a></td>
+              <td><a href="{{ url_for('member.update_patient', patient_id=patient.id) }}">{{ patient.phone_number }}</a></td>
+              <td>          
+                <button type="button" class="btn btn-sm btn-warning float"
+                onclick=window.location.href="{{ url_for('member.patients_appointments', patient_id=patient.id) }}">
+                Manage
+                <i class="fas fa-calendar-check"></i>
+              </button>
+            </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+{% endblock %}
